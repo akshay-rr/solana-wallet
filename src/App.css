@@ -1,5 +1,13 @@
+@font-face {
+    font-family: rubik;
+    src: url('static/fonts/Rubik-VariableFont_wght.ttf');
+}
+
 .App {
   text-align: center;
+  width: 360px;
+  height: 540px;
+  font-family: rubik !important;
 }
 
 .App-logo {
@@ -24,6 +32,17 @@
   color: white;
 }
 
+.App-header-main {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -35,4 +54,167 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Custom */
+
+button {
+    margin: 0.1em !important;
+}
+
+.container {
+    width: 96%;
+    padding: 0.2em;
+}
+
+.redbox {
+    border: 1px solid red;
+}
+
+.account-setup-input {
+    margin-bottom: 0.2em;
+}
+
+.mnemonic-item {
+    padding: 0.5em !important;
+    margin: 0.1em !important;
+}
+
+.mnemonic-item > div {
+    border: 1px solid #566473;
+    border-radius: 5px !important;
+    padding: 0.5em;
+    font-size: 0.8em;
+}
+
+.copy-to-clipboard-button {
+    opacity: 0.7;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.copy-to-clipboard-button:hover {
+    opacity: 0.5;
+}
+
+.mnemonic-item-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mnemonic-item-input-container > input {
+    background-color: #282c34;
+    border: none;
+    color: white;
+}
+
+.mnemonic-item-input-container > input:focus {
+    background-color: #282c34 !important;
+    border: none !important;
+    color: white;
+}
+
+#mainWalletAddress {
+    width: 80%;
+    text-overflow: ellipsis !important;
+    display: block;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9em;
+    overflow: hidden;
+}
+
+#mainWalletAddress:hover {
+    opacity: 0.7;
+}
+
+#navbar {
+    flex-grow: 0;
+    height: 60px;
+    width: 100%;
+    background-color: #1e2026;
+    display: flex;
+    align-items: center;
+}
+
+#topbar {
+    flex-grow: 0;
+    height: 46px;
+    width: 100%;
+    background-color: #1e2026;
+    text-align: center;
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#content {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+}
+
+.token-balance-card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 0.5em;
+    text-align: left;
+    background-color: #222733;
+}
+
+.token-amount, .token-symbol {
+    font-size: 0.9em;
+    color: gray;
+    display: inline-block;
+    padding: 0.2em;
+    margin: 0.2em;
+}
+
+.button-row {
+    width: 90%;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+}
+
+.button-row-child {
+    width: 45%;
+    text-align: center;
+}
+
+.button-row-child > button {
+    width: 100%;
+}
+
+.nav-button-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.content-heading {
+    width: 90%;
+    text-align: left;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.onboarding-button {
+    width: 80%;
 }
