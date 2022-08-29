@@ -10,6 +10,14 @@ export const loadAccount = () => {
     return null;
 }
 
+export const saveNetwork = (networkObject) => {
+    localStorage.setItem('network', JSON.stringify(networkObject));
+}
+
+export const loadNetwork = () => {
+    return JSON.parse(localStorage.getItem('network'));
+}
+
 export const deleteAccount = () => {
     localStorage.removeItem('account');
 }

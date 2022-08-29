@@ -1,3 +1,5 @@
+import { clusterApiUrl } from "@solana/web3.js";
+
 export const CLUSTER_URLS = {
     TEST: "https://api.testnet.solana.com",
     DEV: "https://api.devnet.solana.com",
@@ -15,4 +17,19 @@ export const IMPORT_WALLET_STEPS = {
     ACCOUNT_SELECT: 1,
     ACCOUNT_CREDENTIALS: 2,
     COMPLETE: 3
+}
+
+export const NETWORKS = {
+    DEV: {
+        name: "Devnet",
+        url: clusterApiUrl('devnet')
+    },
+    TEST: {
+        name: "Testnet",
+        url: clusterApiUrl('testnet')
+    },
+    MAIN: {
+        name: "Mainnet",
+        url: clusterApiUrl('mainnet-beta')
+    }
 }

@@ -3,11 +3,10 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { getWalletBalance } from "../../services/Web3Service";
 
 export function* getSelectedWalletBalance(action) {
-    const walletAddress = action.payload;
-    console.log('GET BALANCE SAGA CALLED');
+    const {walletAddress, network} = action.payload;
     try {
         yield put(requestAccountBalanceAction());
-        const walletBalanceResponse = yield call(getWalletBalance, walletAddress);
+        const walletBalanceResponse = yield call(getWalletBalance, walletAddress, network);
         yield put(setWalletBalanceAction(walletBalanceResponse));
     } catch (e) {
         yield put(setWalletBalanceErrorAction());

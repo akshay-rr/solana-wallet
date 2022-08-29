@@ -7,6 +7,7 @@ import Loading from "./common/Loading";
 import { getWalletAddressFromSeed } from "../services/Web3Service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faBoltLightning, faGear } from "@fortawesome/free-solid-svg-icons";
+import NetworkBanner from "./NetworkBanner";
 
 const Main = () => {
 
@@ -19,7 +20,7 @@ const Main = () => {
 
     useEffect(() => {
         console.log('Fetch account details');
-        dispatch(getWalletBalanceAction(walletAddress));
+        dispatch(getWalletBalanceAction(walletAddress, account.selectedNetwork.url));
     }, []);
 
     return (
@@ -36,6 +37,7 @@ const Main = () => {
                     </div>
                 </div>
 
+                <NetworkBanner />
 
 
                 <div id={'content'} className="row">

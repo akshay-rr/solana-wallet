@@ -2,8 +2,8 @@ import './App.css';
 import Main from './components/Main';
 import { useEffect } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { loadAccount } from './services/DataStorageService';
-import { setSelectedAccount } from './redux/actions/AccountActions';
+import { loadAccount, loadNetwork } from './services/DataStorageService';
+import { setSelectedAccount, setSelectedNetwork } from './redux/actions/AccountActions';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CreateNewWallet from './components/onboarding/CreateNewWallet';
 import ImportExistingWallet from './components/onboarding/ImportExistingWallet';
@@ -16,8 +16,16 @@ function App() {
     const dispatch = useDispatch();
     const account = useSelector((state) => state.account, shallowEqual);
 
+
+    console.log('APP');
+    console.log(account);
+
     useEffect(() => {
         let retrievedAccount = loadAccount();
+        let retrievedNetwork = loadNetwork();
+        if(retrievedNetwork) {
+            dispatch(setSelectedNetwork(retrievedNetwork));
+        }
         dispatch(setSelectedAccount(retrievedAccount));
     }, []);
 
