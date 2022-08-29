@@ -172,12 +172,14 @@ button {
 .token-balance-card {
     margin-left: auto;
     margin-right: auto;
-    width: 90%;
+    width: 90% !important;
     border-radius: 5px;
-    margin-top: 1em;
+    margin-top: 1em !important;
     padding: 1em;
     text-align: left;
     background-color: #222733;
+    max-height: 86px;
+    cursor: pointer;
 }
 
 .transaction-card {
@@ -208,6 +210,11 @@ button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.button-row > button {
+    width: 100%;
 }
 
 .button-row-child {
@@ -257,4 +264,18 @@ button {
 .banner-child {
     width: 90%;
     text-align: left;
+}
+
+#qrCodeContainer {
+    background-color: white;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 8px;
+    height: 160px;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

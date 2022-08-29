@@ -17,7 +17,17 @@ export const IMPORT_WALLET_STEPS = {
     ACCOUNT_SELECT: 1,
     ACCOUNT_CREDENTIALS: 2,
     COMPLETE: 3
-}
+};
+
+export const DEPOSIT_STEPS = {
+    TOKEN_SELECT: 0,
+    DEPOSIT_ADDRESS: 1
+};
+
+export const SEND_STEPS = {
+    TOKEN_SELECT: 0,
+    SEND_ADDRESS: 1
+};
 
 export const NETWORKS = {
     DEV: {

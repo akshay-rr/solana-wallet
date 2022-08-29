@@ -7,7 +7,8 @@ import { NETWORKS } from "../constants/Constants";
 import { setSelectedNetwork } from "../redux/actions/AccountActions";
 import { getNetworkObjectByNetworkName } from "../utils/Utils";
 import { saveNetwork } from "../services/DataStorageService";
-import NetworkBanner from "./NetworkBanner";
+import NetworkBanner from "./common/NetworkBanner";
+import Topbar from "./common/Topbar";
 
 const Settings = () => {
 
@@ -36,15 +37,7 @@ const Settings = () => {
         <div className="App">
             <div className="App-header-main">
 
-                <div id={'topbar'} className={'row'}>
-                    <div className="col-sm-12">
-                        <div 
-                            id={'mainWalletAddress'} 
-                            onClick={() => navigator.clipboard.writeText(walletAddress)}>
-                            {walletAddress}
-                        </div>
-                    </div>
-                </div>
+                <Topbar />
 
                 <NetworkBanner />
 

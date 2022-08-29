@@ -7,7 +7,8 @@ import Loading from "./common/Loading";
 import { getWalletAddressFromSeed } from "../services/Web3Service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faBoltLightning, faGear } from "@fortawesome/free-solid-svg-icons";
-import NetworkBanner from "./NetworkBanner";
+import NetworkBanner from "./common/NetworkBanner";
+import Topbar from "./common/Topbar";
 
 const Main = () => {
 
@@ -15,7 +16,6 @@ const Main = () => {
     const navigate = useNavigate();
 
     const account = useSelector((state) => state.account, shallowEqual);
-    console.log(account);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
 
     useEffect(() => {
@@ -27,15 +27,7 @@ const Main = () => {
         <div className="App">
             <div className="App-header-main">
 
-                <div id={'topbar'} className={'row'}>
-                    <div className="col-sm-12">
-                        <div 
-                            id={'mainWalletAddress'} 
-                            onClick={() => navigator.clipboard.writeText(walletAddress)}>
-                            {walletAddress}
-                        </div>
-                    </div>
-                </div>
+                <Topbar />
 
                 <NetworkBanner />
 
@@ -47,10 +39,14 @@ const Main = () => {
                         
                         <div className="button-row">
                             <div className="button-row-child">
-                                <button className="btn btn-primary">Deposit</button>
+                                <button 
+                                    className="btn btn-primary"
+                                    onClick={() => navigate('/deposit')}>Deposit</button>
                             </div>
                             <div className="button-row-child">
-                                <button className="btn btn-primary">Send</button>
+                                <button 
+                                    className="btn btn-primary"
+                                    onClick={() => navigate('/send')}>Send</button>
                             </div>
                         </div>
                         {

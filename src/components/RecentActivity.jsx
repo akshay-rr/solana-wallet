@@ -8,7 +8,8 @@ import { getWalletTransactionsAction } from "../redux/actions/AccountActions";
 import { RetrievableDataStatus } from "../constants/AppConstants";
 import Loading from "./common/Loading";
 import TransactionCard from "./TransactionCard";
-import NetworkBanner from "./NetworkBanner";
+import NetworkBanner from "./common/NetworkBanner";
+import Topbar from "./common/Topbar";
 
 const RecentActivity = () => {
 
@@ -16,7 +17,6 @@ const RecentActivity = () => {
     const dispatch = useDispatch();
 
     const account = useSelector((state) => state.account, shallowEqual);
-    console.log(account);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
 
     useEffect(() => {
@@ -27,15 +27,7 @@ const RecentActivity = () => {
         <div className="App">
             <div className="App-header-main">
 
-                <div id={'topbar'} className={'row'}>
-                    <div className="col-sm-12">
-                        <div 
-                            id={'mainWalletAddress'} 
-                            onClick={() => navigator.clipboard.writeText(walletAddress)}>
-                            {walletAddress}
-                        </div>
-                    </div>
-                </div>
+                <Topbar />
 
                 <NetworkBanner />
 

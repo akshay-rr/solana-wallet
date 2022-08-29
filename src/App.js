@@ -10,6 +10,8 @@ import ImportExistingWallet from './components/onboarding/ImportExistingWallet';
 import OnboardingMain from './components/onboarding/OnboardingMain';
 import RecentActivity from './components/RecentActivity';
 import Settings from './components/Settings';
+import Deposit from './components/transfer/Deposit';
+import Send from './components/transfer/Send';
 
 function App() {
 
@@ -36,6 +38,8 @@ function App() {
                     <Route path={'/'} element={<Main />} />
                     <Route path={'/activity'} element={<RecentActivity />} />
                     <Route path={'/settings'} element={<Settings />} />
+                    <Route path={'/deposit'} element={<Deposit />} />
+                    <Route path={'/send'} element={<Send />} />
                 </Routes>
             </MemoryRouter>
         )
