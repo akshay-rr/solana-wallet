@@ -4,7 +4,6 @@ import { getWalletTransactions } from "../../services/Web3Service";
 
 export function* getSelectedWalletTransactions(action) {
     const {walletAddress, network} = action.payload;
-    console.log('GET Transactions SAGA CALLED');
     try {
         yield put(requestAccountTransactionsAction());
         const walletTransactionsResponse = yield call(getWalletTransactions, walletAddress, network);

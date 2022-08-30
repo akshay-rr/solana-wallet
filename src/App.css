@@ -162,6 +162,16 @@ button {
     align-items: center;
 }
 
+#onboardingContent {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #banner {
     width: 100%;
     display: flex;
@@ -324,4 +334,9 @@ button {
 
 .full-width-content > * {
     width: 100% !important;
+}
+
+.new-wallet-mnemonic-table {
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -16,7 +16,6 @@ const Settings = () => {
     const dispatch = useDispatch();
 
     const account = useSelector((state) => state.account, shallowEqual);
-    console.log(account);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
 
     const changeNetwork = (networkName) => {

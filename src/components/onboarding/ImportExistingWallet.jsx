@@ -7,6 +7,7 @@ import { saveAccount } from "../../services/DataStorageService";
 import { setSelectedAccount } from "../../redux/actions/AccountActions";
 import Loading from "../common/Loading";
 import AccountCredentials from "./AccountCredentials";
+import { useNavigate } from "react-router-dom";
 
 
 const SeedPhraseEntry = () => {
@@ -40,108 +41,117 @@ const SeedPhraseEntry = () => {
     return (
         <div className="App">
             <div className="App-header">
-                <div>
-                    <table className={'new-wallet-mnemonic-table'}>
-                        <tbody>
-                            <tr>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        1.
-                                        <input type="text" class="form-control"  value={mnemonicArray[0]}
-                                        onChange={(e) => setMnemonic(0, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        2.
-                                        <input type="text" class="form-control" value={mnemonicArray[1]}
-                                        onChange={(e) => setMnemonic(1, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        3.
-                                        <input type="text" class="form-control" value={mnemonicArray[2]}
-                                        onChange={(e) => setMnemonic(2, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        4.
-                                        <input type="text" class="form-control" value={mnemonicArray[3]}
-                                        onChange={(e) => setMnemonic(3, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        5.
-                                        <input type="text" class="form-control" value={mnemonicArray[4]}
-                                        onChange={(e) => setMnemonic(4, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        6.
-                                        <input type="text" class="form-control" value={mnemonicArray[5]}
-                                        onChange={(e) => setMnemonic(5, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        7.
-                                        <input type="text" class="form-control" value={mnemonicArray[6]}
-                                        onChange={(e) => setMnemonic(6, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        8.
-                                        <input type="text" class="form-control" value={mnemonicArray[7]}
-                                        onChange={(e) => setMnemonic(7, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        9.
-                                        <input type="text" class="form-control" value={mnemonicArray[8]}
-                                        onChange={(e) => setMnemonic(8, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        10.
-                                        <input type="text" class="form-control" value={mnemonicArray[9]}
-                                        onChange={(e) => setMnemonic(9, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        11.
-                                        <input type="text" class="form-control" value={mnemonicArray[10]}
-                                        onChange={(e) => setMnemonic(10, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                                <td className="mnemonic-item">
-                                    <div className="mnemonic-item-input-container">
-                                        12.
-                                        <input type="text" class="form-control" value={mnemonicArray[11]}
-                                        onChange={(e) => setMnemonic(11, e.currentTarget.value)} required/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id={'topbar'} className={'row'}>
+                    <div className="col-sm-12">
+                        Import Wallet
+                    </div>
+                </div>
+                <div id={'onboardingContent'}>
+                    <div className="content-child">
+                        <table className={'new-wallet-mnemonic-table'}>
+                            <tbody>
+                                <tr>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            1.
+                                            <input type="text" class="form-control"  value={mnemonicArray[0]}
+                                            onChange={(e) => setMnemonic(0, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            2.
+                                            <input type="text" class="form-control" value={mnemonicArray[1]}
+                                            onChange={(e) => setMnemonic(1, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            3.
+                                            <input type="text" class="form-control" value={mnemonicArray[2]}
+                                            onChange={(e) => setMnemonic(2, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            4.
+                                            <input type="text" class="form-control" value={mnemonicArray[3]}
+                                            onChange={(e) => setMnemonic(3, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            5.
+                                            <input type="text" class="form-control" value={mnemonicArray[4]}
+                                            onChange={(e) => setMnemonic(4, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            6.
+                                            <input type="text" class="form-control" value={mnemonicArray[5]}
+                                            onChange={(e) => setMnemonic(5, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            7.
+                                            <input type="text" class="form-control" value={mnemonicArray[6]}
+                                            onChange={(e) => setMnemonic(6, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            8.
+                                            <input type="text" class="form-control" value={mnemonicArray[7]}
+                                            onChange={(e) => setMnemonic(7, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            9.
+                                            <input type="text" class="form-control" value={mnemonicArray[8]}
+                                            onChange={(e) => setMnemonic(8, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            10.
+                                            <input type="text" class="form-control" value={mnemonicArray[9]}
+                                            onChange={(e) => setMnemonic(9, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            11.
+                                            <input type="text" class="form-control" value={mnemonicArray[10]}
+                                            onChange={(e) => setMnemonic(10, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                    <td className="mnemonic-item">
+                                        <div className="mnemonic-item-input-container">
+                                            12.
+                                            <input type="text" class="form-control" value={mnemonicArray[11]}
+                                            onChange={(e) => setMnemonic(11, e.currentTarget.value)} required/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <br />
+                </div>
+                <div className="button-row">
                     <button 
                         className="btn btn-primary onboarding-button"
                         onClick={importWallet} disabled={!isMnemonicValid()}>Import</button>
-                </div>  
+                </div>
             </div>
         </div>
     )
@@ -161,7 +171,6 @@ const AccountSelect = () => {
         // if(wallet) {
         setLoading(true);
         getWalletBalance(walletAddress).then((balance) => {
-            console.log(balance);
             setBalance(balance);
         }).catch((e) => {
             console.log(e);
@@ -177,14 +186,26 @@ const AccountSelect = () => {
 
     return (
         <div className="App">
-            <div className="App-header">
-                <div className="account-select-container">
-                    <div>{walletAddress}</div>
-                    {
-                        loading ?
-                        <Loading /> :
-                        <div>{balance}</div>
-                    }
+            <div className="App-header-main">
+                <div id={'topbar'} className={'row'}>
+                    <div className="col-sm-12">
+                        Import Wallet
+                    </div>
+                </div>
+                <div id={'onboardingContent'}>
+                    <div className="content-child">
+                        <div className="account-select-container">
+                            <div>{walletAddress}</div>
+                            {
+                                loading ?
+                                <Loading /> :
+                                <div>{balance}</div>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+                <div className="button-row">
                     <button className="btn btn-primary onboarding-button" onClick={continueSetup}>Continue</button>
                 </div>
             </div>
@@ -193,6 +214,8 @@ const AccountSelect = () => {
 }
 
 const ImportExistingWallet = () => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const onboarding = useSelector((state) => state.onboarding, shallowEqual);
@@ -207,6 +230,7 @@ const ImportExistingWallet = () => {
 
         saveAccount(account);
         dispatch(setSelectedAccount(account));
+        navigate('/');
         // Set account in global state
     };
 
@@ -217,7 +241,7 @@ const ImportExistingWallet = () => {
         case IMPORT_WALLET_STEPS.ACCOUNT_SELECT:
             return <AccountSelect />
         case IMPORT_WALLET_STEPS.ACCOUNT_CREDENTIALS:
-            return <AccountCredentials callback={finish} />
+            return <AccountCredentials callback={finish} mode={'Import Wallet'} />
     }
 }
 

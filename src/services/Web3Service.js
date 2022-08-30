@@ -40,7 +40,6 @@ export const getWalletTransactions = async (walletAddress, network) => {
     let transactionList = await connection.getSignaturesForAddress(publicKey, {limit:10});
     let signatureList = transactionList.map(transaction=>transaction.signature);
     let transactionDetails = await connection.getParsedTransactions(signatureList);
-    console.log(transactionDetails);
     return transactionList;
 }
 

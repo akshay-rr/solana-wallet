@@ -8,7 +8,7 @@ const OnboardingMain = () => {
     return (
         <div className="App">
             <div className="App-header">
-                <div id={'createWalletContainer'} className='conatiner'>
+                <div className={"content-child"}>
                     <button 
                         className="btn btn-primary onboarding-button"
                         onClick={() => navigate('/create-new')}>Create a new wallet</button>
