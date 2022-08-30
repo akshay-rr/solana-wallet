@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { DEPOSIT_STEPS } from "../../constants/Constants";
@@ -20,9 +19,11 @@ const DepositTokenSelect = () => {
 
     return (
         <>
-            <div id={'content'} className="row">
-                <div className="token-balance-card" onClick={nextStep}>
-                    <div>Solana</div>
+            <div id={'content'}>
+                <div className="content-child">
+                    <div className="token-balance-card" onClick={nextStep}>
+                        <div>Solana</div>
+                    </div>
                 </div>
             </div>
 
@@ -36,34 +37,41 @@ const DepositTokenSelect = () => {
 }
 
 const DepositAddress = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const account = useSelector((state) => state.account, shallowEqual);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
+    
+    const close = () => {
+        dispatch(setDepositStepAction(DEPOSIT_STEPS.TOKEN_SELECT));
+        navigate('/');
+    }
 
     return (
         <>
-            <div id={'content'} className="row">
-                <div>
+            <div id={'content'}>
+                <div className="content-child page-heading-center">
                     <h2>Deposit SOL</h2>
                 </div>
                 <br />
-                <div id={'qrCodeContainer'}>
+                <div className="content-child" id={'qrCodeContainer'}>
                     <QRCodeSVG value={walletAddress} />
                 </div>
                 <br />
-                <div>
-                    <div class="input-group mb-3">
-                    <input type="text" class="form-control" value={walletAddress}
-                        placeholder="Recipient's username" disabled={true}/>
-                    <button 
-                        class="btn btn-outline-secondary" type="button" id="button-addon2"
-                        onClick={() => navigator.clipboard.writeText(walletAddress)}>
-                        Copy
-                    </button>
+                <div className="content-child">
+                    <div id="depositWalletAddressContainer">
+                        <div id={'depositWalletAddressValue'}>
+                            {walletAddress}
+                        </div>
+                        <button 
+                            class="btn btn-outline-secondary" type="button"
+                            onClick={() => navigator.clipboard.writeText(walletAddress)}>
+                            Copy
+                        </button>
                     </div>
                 </div>
                 <br />
-                <div>
+                <div className="content-child" id="depositMessage">
                     This address can only be used to receive SOL and SPL tokens on Solana.
                 </div>
             </div>
@@ -71,7 +79,7 @@ const DepositAddress = () => {
             <div className="button-row">
                 <button 
                     className="btn btn-primary btn-dark"
-                    onClick={() => navigate('/')}>Close</button>
+                    onClick={close}>Close</button>
             </div>
         </>
     )

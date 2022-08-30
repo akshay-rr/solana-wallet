@@ -41,42 +41,40 @@ const Settings = () => {
 
                 <NetworkBanner />
 
-                <div id={'content'} className="row">
-                    <div className="col-md-12">
-                        <div className="content-heading">
-                            <h2>Settings</h2>
-                        </div>
+                <div id={'content'}>
+                    <div className="content-child page-heading">
+                        <h2>Settings</h2>
+                    </div>
 
-                        <div className="content-body">
-                            <select 
-                                class="form-select form-select-lg mb-3" 
-                                aria-label=".form-select-lg example"
-                                value={account.selectedNetwork.name}
-                                onChange={(e) => changeNetwork(e.currentTarget.value)}>
-                                {
-                                    Object.values(NETWORKS).map((networkObject) => {
-                                        return <option value={networkObject.name}>{networkObject.name}</option>
-                                    })
-                                }
-                            </select>
-                            <br />
-                            <button className="btn btn-primary btn-warning">Lock Account</button>
-                            <br />
-                            <button className="btn btn-primary btn-danger">Remove Account</button>
-                        </div>
+                    <div className="content-child full-width-content">
+                        <select 
+                            class="form-select form-select-lg mb-3 form-input-field" 
+                            aria-label=".form-select-lg example"
+                            value={account.selectedNetwork.name}
+                            onChange={(e) => changeNetwork(e.currentTarget.value)}>
+                            {
+                                Object.values(NETWORKS).map((networkObject) => {
+                                    return <option value={networkObject.name}>{networkObject.name}</option>
+                                })
+                            }
+                        </select>
+                        <br />
+                        <button className="btn btn-primary">Lock Account</button>
+                        <br />
+                        <button className="btn btn-outline-secondary">Remove Account</button>
                     </div>
                 </div>
 
                 <div id={'navbar'} className="row">
                     <div className="col-md-12">
                         <div className="nav-button-container">
-                            <div onClick={() => navigate('/')}>
+                            <div className="navbar-element" onClick={() => navigate('/')}>
                                 <FontAwesomeIcon icon={faSquare} />
                             </div>
-                            <div onClick={() => navigate('/activity')}>
+                            <div className="navbar-element" onClick={() => navigate('/activity')}>
                                 <FontAwesomeIcon icon={faBoltLightning} />
                             </div>
-                            <div>
+                            <div className="navbar-element">
                                 <FontAwesomeIcon icon={faGear} />
                             </div>
                         </div>

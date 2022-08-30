@@ -157,6 +157,9 @@ button {
     flex-grow: 1;
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #banner {
@@ -172,7 +175,7 @@ button {
 .token-balance-card {
     margin-left: auto;
     margin-right: auto;
-    width: 90% !important;
+    width: 100%;
     border-radius: 5px;
     margin-top: 1em !important;
     padding: 1em;
@@ -192,6 +195,11 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.9em;
+    cursor: pointer;
+}
+
+.transaction-card:hover {
+    opacity: 0.8;
 }
 
 .token-amount, .token-symbol {
@@ -235,28 +243,6 @@ button {
     align-items: center;
 }
 
-.content-heading {
-    width: 90%;
-    text-align: left;
-    margin-top: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
-
-.content-body {
-    width: 90%;
-    text-align: left;
-    margin-top: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
-
-.content-body > button, .content-body > select {
-    width: 100%;
-}
-
 .onboarding-button {
     width: 80%;
 }
@@ -267,15 +253,75 @@ button {
 }
 
 #qrCodeContainer {
-    background-color: white;
     padding: 1em;
     margin: 1em;
     border-radius: 8px;
     height: 160px;
     width: 160px;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#depositMessage {
+    font-size: 0.7em;
+    color: gray;
+}
+
+.content-child {
+    margin-top: 0.2em;
+    width: 90% !important;
+}
+
+.navbar-element {
+    cursor: pointer;
+}
+
+.navbar-element:hover {
+    opacity: 0.8;
+}
+
+#depositWalletAddressContainer {
+    width: 100%;
+    padding: 0.4em;
+    border: 1px solid slategray;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 8px;
+}
+
+#depositWalletAddressValue {
+    font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60%;
+}
+
+#depositWalletAddressContainer > button {
+    width: 30%;
+    text-align: center;
+}
+
+.page-heading-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.form-input-field {
+    background-color: #1e2026 !important;
+    border: 1px solid slategray !important;
+    color: slategray !important;
+}
+
+.full-width-content > * {
+    width: 100% !important;
 }

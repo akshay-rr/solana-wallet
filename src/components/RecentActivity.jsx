@@ -31,40 +31,38 @@ const RecentActivity = () => {
 
                 <NetworkBanner />
 
-                <div id={'content'} className="row">
-                    <div className="col-md-12">
-                        <div className="content-heading">
-                            <h2>Recent Activity</h2>
-                        </div>
+                <div id={'content'}>
+                    <div className="content-child page-heading">
+                        <h2>Recent Activity</h2>
+                    </div>
 
-                        <div className="content-body">
-                            {
-                                account.transactions.status === RetrievableDataStatus.RETRIEVED ?
-                                <>
-                                    {
-                                    account.transactions.data.map((transaction) => {
-                                        return <TransactionCard tranaction={transaction} />
-                                    })
-                                    }
-                                </> :
-                                account.transactions.status === RetrievableDataStatus.ERROR ?
-                                <div>Error</div> :
-                                <Loading />
-                            }
-                        </div>
+                    <div className="content-child">
+                        {
+                            account.transactions.status === RetrievableDataStatus.RETRIEVED ?
+                            <>
+                                {
+                                account.transactions.data.map((transaction) => {
+                                    return <TransactionCard transaction={transaction} />
+                                })
+                                }
+                            </> :
+                            account.transactions.status === RetrievableDataStatus.ERROR ?
+                            <div>Error</div> :
+                            <Loading />
+                        }
                     </div>
                 </div>
 
                 <div id={'navbar'} className="row">
                     <div className="col-md-12">
                         <div className="nav-button-container">
-                            <div onClick={() => navigate('/')}>
+                            <div className="navbar-element" onClick={() => navigate('/')}>
                                 <FontAwesomeIcon icon={faSquare} />
                             </div>
-                            <div>
+                            <div className="navbar-element">
                                 <FontAwesomeIcon icon={faBoltLightning} />
                             </div>
-                            <div onClick={() => navigate('/settings')}>
+                            <div className="navbar-element" onClick={() => navigate('/settings')}>
                                 <FontAwesomeIcon icon={faGear} />
                             </div>
                         </div>

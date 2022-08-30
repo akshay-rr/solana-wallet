@@ -32,52 +32,49 @@ const Main = () => {
                 <NetworkBanner />
 
 
-                <div id={'content'} className="row">
-                    <div className="col-md-12">
-
-                        <div></div>
-                        
-                        <div className="button-row">
-                            <div className="button-row-child">
-                                <button 
-                                    className="btn btn-primary"
-                                    onClick={() => navigate('/deposit')}>Deposit</button>
-                            </div>
-                            <div className="button-row-child">
-                                <button 
-                                    className="btn btn-primary"
-                                    onClick={() => navigate('/send')}>Send</button>
-                            </div>
+                <div id={'content'}>
+                    <div className="button-row">
+                        <div className="button-row-child">
+                            <button 
+                                className="btn btn-primary"
+                                onClick={() => navigate('/deposit')}>Deposit</button>
                         </div>
-                        {
-                            account.balance.status === RetrievableDataStatus.REQUESTED 
-                            || account.balance.status === RetrievableDataStatus.INIT ?
-                            <Loading /> :
-                            account.balance.status === RetrievableDataStatus.RETRIEVED ?
+                        <div className="button-row-child">
+                            <button 
+                                className="btn btn-primary"
+                                onClick={() => navigate('/send')}>Send</button>
+                        </div>
+                    </div>
+                    {
+                        account.balance.status === RetrievableDataStatus.REQUESTED 
+                        || account.balance.status === RetrievableDataStatus.INIT ?
+                        <Loading /> :
+                        account.balance.status === RetrievableDataStatus.RETRIEVED ?
+                        <div className="content-child">
                             <div className="token-balance-card">
                                 <div>Solana</div>
                                 <div>
                                     <span className="token-amount">{account.balance.data}</span>
                                     <span className="token-symbol">SOL</span>
                                 </div>
-                            </div> :
-                            account.balance.status === RetrievableDataStatus.ERROR ?
-                            <div>Error</div> :
-                            <div>Unknown</div>
-                        }
-                    </div>
+                            </div>
+                        </div> :
+                        account.balance.status === RetrievableDataStatus.ERROR ?
+                        <div>Error</div> :
+                        <div>Unknown</div>
+                    }
                 </div>
 
                 <div id={'navbar'} className="row">
                     <div className="col-md-12">
                         <div className="nav-button-container">
-                            <div>
+                            <div className="navbar-element">
                                 <FontAwesomeIcon icon={faSquare} />
                             </div>
-                            <div onClick={() => navigate('/activity')}>
+                            <div className="navbar-element" onClick={() => navigate('/activity')}>
                                 <FontAwesomeIcon icon={faBoltLightning} />
                             </div>
-                            <div onClick={() => navigate('/settings')}>
+                            <div className="navbar-element" onClick={() => navigate('/settings')}>
                                 <FontAwesomeIcon icon={faGear} />
                             </div>
                         </div>

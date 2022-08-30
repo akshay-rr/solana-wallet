@@ -1,5 +1,6 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
-import { Keypair, PublicKey, Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Keypair, PublicKey, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { TEST_NETWORKS } from '../constants/Constants';
 
 export const generateNewWallet = () => {
     const mnemonic = generateMnemonic();
@@ -39,6 +40,22 @@ export const getWalletTransactions = async (walletAddress, network) => {
     let transactionList = await connection.getSignaturesForAddress(publicKey, {limit:10});
     let signatureList = transactionList.map(transaction=>transaction.signature);
     let transactionDetails = await connection.getParsedTransactions(signatureList);
-
+    console.log(transactionDetails);
     return transactionList;
+}
+
+export const validateSolAddress = (walletAddress) => {
+    try {
+        let pubkey = new PublicKey(walletAddress)
+        let  isSolana =  PublicKey.isOnCurve(pubkey.toBuffer())
+        return isSolana
+    } catch (error) {
+        return false
+    }
+}
+
+export const getExplorerUrl = (signature, network) => {
+    return `https://solscan.io/tx/${signature}` 
+        + (TEST_NETWORKS.includes(network.name) ? 
+        `?cluster=${network.name.toLowerCase()}` : '');
 }

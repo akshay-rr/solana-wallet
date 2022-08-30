@@ -43,3 +43,5 @@ export const NETWORKS = {
         url: clusterApiUrl('mainnet-beta')
     }
 }
+
+export const TEST_NETWORKS = [NETWORKS.DEV.name, NETWORKS.TEST.name];
