@@ -4,7 +4,9 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { SEND_STEPS } from "../../constants/Constants";
 import Topbar from "../common/Topbar";
 import { setSendStepAction, setSelectedTokenAction } from "../../redux/actions/TransferActions";
-import { validateSolAddress } from "../../services/Web3Service";
+import { createSolTransferTransaction, validateSolAddress, getWalletAddressFromSeed } from "../../services/Web3Service";
+import { setTransactionAction } from "../../redux/actions/TransactionActions";
+import NetworkBanner from "../common/NetworkBanner";
 
 
 const SendTokenSelect = () => {
@@ -41,6 +43,9 @@ const SendSolana = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const account = useSelector((state) => state.account, shallowEqual);
+    const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
+
     const [toAddress, setToAddress] = useState('');
     const [amount, setAmount] = useState();
 
@@ -50,6 +55,18 @@ const SendSolana = () => {
     const cancel = () => {
         dispatch(setSendStepAction(SEND_STEPS.TOKEN_SELECT));
         navigate('/');
+    }
+
+    const next = () => {
+        let txn = createSolTransferTransaction(walletAddress, toAddress, parseFloat(amount));
+        let transactionDetails = {
+            transactionObject: txn,
+            from: walletAddress,
+            to: toAddress,
+            amount: parseFloat(amount)
+        }
+        dispatch(setTransactionAction(transactionDetails));
+        navigate('/transaction');
     }
 
     return (
@@ -80,7 +97,7 @@ const SendSolana = () => {
                     <button 
                         className="btn btn-primary"
                         disabled={!(isValidAddress && isValidAmount)}
-                        onClick={() => alert(amount)}>Next</button>
+                        onClick={next}>Next</button>
                 </div>
             </div>
         </>
@@ -96,6 +113,7 @@ const Send = () => {
         <div className="App">
             <div className="App-header">
                 <Topbar />
+                <NetworkBanner />
                 {
                     transfer.sendStep === SEND_STEPS.TOKEN_SELECT ?
                     <SendTokenSelect /> :

@@ -340,3 +340,44 @@ button {
     margin-left: auto;
     margin-right: auto;
 }
+
+.transaction-details {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e2026;
+    border-radius: 8px;
+    padding: 0.5em;
+}
+
+.transaction-details-to-address {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.transaction-network-fee-container {
+    padding: 1em;
+    border: 1px solid slategray;
+    color: slategray;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+
+.transaction-details-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    color:#1e2026;
+    background-color: white;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    margin: 1em;
+}

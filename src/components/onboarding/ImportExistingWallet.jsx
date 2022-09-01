@@ -161,16 +161,17 @@ const AccountSelect = () => {
 
     const dispatch = useDispatch();
     const { wallet } = useSelector((state) => state.onboarding, shallowEqual);
+    const account = useSelector((state) => state.account, shallowEqual);
 
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
 
-    const walletAddress = getWalletAddressFromSeed(wallet.seed);
+    const walletAddress = getWalletAddressFromSeed(JSON.parse(JSON.stringify(wallet)).seed);
 
     useEffect(() => {
         // if(wallet) {
         setLoading(true);
-        getWalletBalance(walletAddress).then((balance) => {
+        getWalletBalance(walletAddress, account.selectedNetwork.url).then((balance) => {
             setBalance(balance);
         }).catch((e) => {
             console.log(e);
@@ -195,11 +196,14 @@ const AccountSelect = () => {
                 <div id={'onboardingContent'}>
                     <div className="content-child">
                         <div className="account-select-container">
-                            <div>{walletAddress}</div>
+                            <div className="transaction-card">
+                                {walletAddress}
+                            </div>
+                            <br />
                             {
                                 loading ?
                                 <Loading /> :
-                                <div>{balance}</div>
+                                <h1>{balance} SOL</h1>
                             }
                             
                         </div>
@@ -224,7 +228,7 @@ const ImportExistingWallet = () => {
         // Save account
         let account = {
             loginCredential: credential,
-            wallet: onboarding.wallet,
+            wallet: JSON.parse(JSON.stringify(onboarding.wallet)),
             loggedIn: true
         };
 

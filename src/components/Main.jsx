@@ -16,9 +16,6 @@ const Main = () => {
     const navigate = useNavigate();
 
     const account = useSelector((state) => state.account, shallowEqual);
-
-    console.log('AAAA');
-    console.log(account.selectedAccount);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
 
     useEffect(() => {

@@ -4,9 +4,9 @@ import { getWalletAddressFromSeed } from "../services/Web3Service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faBoltLightning, faGear } from "@fortawesome/free-solid-svg-icons";
 import { NETWORKS } from "../constants/Constants";
-import { setSelectedNetwork } from "../redux/actions/AccountActions";
+import { setSelectedAccount, setSelectedNetwork } from "../redux/actions/AccountActions";
 import { getNetworkObjectByNetworkName } from "../utils/Utils";
-import { saveNetwork } from "../services/DataStorageService";
+import { deleteAccount, saveAccount, saveNetwork } from "../services/DataStorageService";
 import NetworkBanner from "./common/NetworkBanner";
 import Topbar from "./common/Topbar";
 
@@ -25,11 +25,19 @@ const Settings = () => {
     }
 
     const lockAccount = () => {
-        alert('Lock');
+        let newSelectedAccountState = {
+            ...account.selectedAccount,
+            loggedIn: false
+        }
+        saveAccount(newSelectedAccountState);
+        dispatch(setSelectedAccount(newSelectedAccountState));
+        navigate('/');
     }
 
     const removeAccount = () => {
-        alert('Remove');
+        deleteAccount();
+        dispatch(setSelectedAccount(null));
+        navigate('/');
     }
 
     return (
@@ -58,9 +66,11 @@ const Settings = () => {
                             }
                         </select>
                         <br />
-                        <button className="btn btn-primary">Lock Account</button>
+                        <button className="btn btn-primary"
+                            onClick={lockAccount}>Lock Account</button>
                         <br />
-                        <button className="btn btn-outline-secondary">Remove Account</button>
+                        <button className="btn btn-outline-secondary"
+                            onClick={removeAccount}>Remove Account</button>
                     </div>
                 </div>
 

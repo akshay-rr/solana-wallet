@@ -18,12 +18,15 @@ import { all, fork } from 'redux-saga/effects';
 import RootReducer from './reducers/RootReducer';
 import AccountBalanceSaga from './sagas/AccountBalanceSaga';
 import AccountTransactionsSaga from './sagas/AccountTransactionsSaga';
-
+import TransactionEstimateSaga from './sagas/TransactionEstimateSaga';
+import TransactionResponseSaga from './sagas/TransactionResponseSaga';
 
 function* rootSaga() {
     yield all([
         fork(AccountBalanceSaga),
-        fork(AccountTransactionsSaga)
+        fork(AccountTransactionsSaga),
+        fork(TransactionEstimateSaga),
+        fork(TransactionResponseSaga)
     ])
 }
 

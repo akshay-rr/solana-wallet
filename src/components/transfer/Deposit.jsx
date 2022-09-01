@@ -5,6 +5,7 @@ import Topbar from "../common/Topbar";
 import { setDepositStepAction, setSelectedTokenAction } from "../../redux/actions/TransferActions";
 import { QRCodeSVG } from 'qrcode.react';
 import { getWalletAddressFromSeed } from "../../services/Web3Service";
+import NetworkBanner from "../common/NetworkBanner";
 
 
 const DepositTokenSelect = () => {
@@ -94,6 +95,7 @@ const Deposit = () => {
         <div className="App">
             <div className="App-header">
                 <Topbar />
+                <NetworkBanner />
                 {
                     transfer.depositStep === DEPOSIT_STEPS.TOKEN_SELECT ?
                     <DepositTokenSelect /> :
