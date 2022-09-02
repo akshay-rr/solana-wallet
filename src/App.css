@@ -381,3 +381,24 @@ button {
     height: 60px;
     margin: 1em;
 }
+
+.transaction-card-signature {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.transaction-card-meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7em;
+}
+
+.transaction-failure {
+    color: lightcoral;
+}
+
+.transaction-success {
+    color: lightgreen;
+}

@@ -45,7 +45,7 @@ export const getWalletTransactions = async (walletAddress, network) => {
     let transactionList = await connection.getSignaturesForAddress(publicKey, {limit:10});
     let signatureList = transactionList.map(transaction=>transaction.signature);
     let transactionDetails = await connection.getParsedTransactions(signatureList);
-    return transactionList;
+    return transactionDetails;
 }
 
 export const createSolTransferTransaction = (fromAddress, toAddress, amount) => {

@@ -41,8 +41,8 @@ const RecentActivity = () => {
                             account.transactions.status === RetrievableDataStatus.RETRIEVED ?
                             <>
                                 {
-                                account.transactions.data.map((transaction) => {
-                                    return <TransactionCard transaction={transaction} />
+                                account.transactions.data.map((transactionDetail) => {
+                                    return <TransactionCard transactionDetail={transactionDetail} />
                                 })
                                 }
                             </> :
