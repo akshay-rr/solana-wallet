@@ -3,8 +3,6 @@ import { useSelector, shallowEqual } from "react-redux";
 
 const TransactionCard = ({ transactionDetail }) => {
 
-    console.log(transactionDetail);
-
     const account = useSelector((state) => state.account, shallowEqual);
 
     const signature = transactionDetail.transaction.signatures[0];

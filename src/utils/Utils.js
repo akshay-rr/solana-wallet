@@ -10,3 +10,7 @@ export const getNetworkObjectByNetworkName = (name) => {
             return NETWORKS.DEV;
     }
 }
+
+export const isValidString = (str) => {
+    return str !== null && str !== undefined && str.trim().length > 0;
+}

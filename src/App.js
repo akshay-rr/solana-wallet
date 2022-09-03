@@ -14,13 +14,13 @@ import Deposit from './components/transfer/Deposit';
 import Send from './components/transfer/Send';
 import Transaction from './components/Transaction';
 import Login from './components/Login';
+import TokenList from './components/TokenList';
+import AddSPLToken from './components/AddSPLToken';
 
 function App() {
 
     const dispatch = useDispatch();
     const account = useSelector((state) => state.account, shallowEqual);
-
-    console.log(account);
 
     useEffect(() => {
         let retrievedAccount = loadAccount();
@@ -50,6 +50,8 @@ function App() {
                 <Route path={'/create-new'} element={<CreateNewWallet />} />
                 <Route path={'/import'} element={<ImportExistingWallet />} />
                 <Route path={'/transaction'} element={<Transaction />} />
+                <Route path={'/token-list'} element={<TokenList />} />
+                <Route path={'/add-spl-token'} element={<AddSPLToken />} />
             </Routes>
         </MemoryRouter>
     )

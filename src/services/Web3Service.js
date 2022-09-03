@@ -1,6 +1,8 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import { Keypair, PublicKey, Connection, LAMPORTS_PER_SOL, Transaction, SystemProgram, sendAndConfirmTransaction } from "@solana/web3.js";
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { TEST_NETWORKS } from '../constants/Constants';
+
 
 export const generateNewWallet = () => {
     const mnemonic = generateMnemonic();
@@ -111,6 +113,17 @@ export const validateSolAddress = (walletAddress) => {
     } catch (error) {
         return false
     }
+}
+
+export const getAssociatedTokenAccounts = async (walletAddress, network) => {
+    const connection = new Connection(network);
+    const pubKey = new PublicKey(walletAddress);
+    const tokenAccounts = await connection.getParsedTokenAccountsByOwner(pubKey, {
+        programId: TOKEN_PROGRAM_ID
+    });
+    console.log('Token Accounts');
+    console.log(tokenAccounts);
+    return tokenAccounts;
 }
 
 export const getExplorerUrl = (signature, network) => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { RetrievableDataStatus } from "../constants/AppConstants";
 import { getWalletBalanceAction } from "../redux/actions/AccountActions";
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faBoltLightning, faGear } from "@fortawesome/free-solid-svg-icons";
 import NetworkBanner from "./common/NetworkBanner";
 import Topbar from "./common/Topbar";
+import { getSPLTokenListAction } from "../redux/actions/SPLTokenActions";
 
 const Main = () => {
 
@@ -20,6 +21,7 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(getWalletBalanceAction(walletAddress, account.selectedNetwork.url));
+        dispatch(getSPLTokenListAction(walletAddress, account.selectedNetwork.url));
     }, []);
 
     return (
@@ -62,6 +64,10 @@ const Main = () => {
                         <div>Error</div> :
                         <div>Unknown</div>
                     }
+
+                    <div className="content-child">
+                        <Link to={'/token-list'} className="manage-token-list">Manage Token List</Link>
+                    </div>
                 </div>
 
                 <div id={'navbar'} className="row">

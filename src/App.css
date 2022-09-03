@@ -402,3 +402,24 @@ button {
 .transaction-success {
     color: lightgreen;
 }
+
+.manage-token-list {
+    text-decoration: none;
+    color: gray;
+    font-size: 0.8em;
+    display: block;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+.token-list-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.add-token-input {
+    margin-top: 1em;
+}
