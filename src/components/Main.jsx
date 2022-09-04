@@ -10,6 +10,8 @@ import { faSquare, faBoltLightning, faGear } from "@fortawesome/free-solid-svg-i
 import NetworkBanner from "./common/NetworkBanner";
 import Topbar from "./common/Topbar";
 import { getSPLTokenListAction } from "../redux/actions/SPLTokenActions";
+import { loadTokenAccountMetadata } from "../services/DataStorageService";
+import TokenCard from "./common/TokenCard";
 
 const Main = () => {
 
@@ -18,10 +20,13 @@ const Main = () => {
 
     const account = useSelector((state) => state.account, shallowEqual);
     const walletAddress = getWalletAddressFromSeed(account.selectedAccount.wallet.seed);
+    const splTokenList = useSelector((state) => state.splTokenList, shallowEqual);
+
+    const tokenMetaData = loadTokenAccountMetadata();
 
     useEffect(() => {
         dispatch(getWalletBalanceAction(walletAddress, account.selectedNetwork.url));
-        dispatch(getSPLTokenListAction(walletAddress, account.selectedNetwork.url));
+        dispatch(getSPLTokenListAction(walletAddress, account.selectedNetwork.url));;
     }, []);
 
     return (
@@ -52,18 +57,34 @@ const Main = () => {
                         <Loading /> :
                         account.balance.status === RetrievableDataStatus.RETRIEVED ?
                         <div className="content-child">
-                            <div className="token-balance-card">
-                                <div>Solana</div>
-                                <div>
-                                    <span className="token-amount">{account.balance.data}</span>
-                                    <span className="token-symbol">SOL</span>
-                                </div>
-                            </div>
+                            <TokenCard name={'Solana'} amount={account.balance.data} symbol={'SOL'} />
                         </div> :
                         account.balance.status === RetrievableDataStatus.ERROR ?
                         <div>Error</div> :
                         <div>Unknown</div>
                     }
+
+                    <div className="content-child">
+                        {
+                            (splTokenList.status === RetrievableDataStatus.REQUESTED || splTokenList.status === RetrievableDataStatus.INIT) ?
+                            <Loading /> :
+                            (splTokenList.status === RetrievableDataStatus.RETRIEVED) ?
+                            <>
+                                {
+                                    splTokenList.data?.value?.map((tokenAccount) => {
+                                        console.log('XVXVX');
+                                        console.log(tokenAccount);
+                                        let mintAddress = tokenAccount.account.data.parsed.info.mint;
+                                        let amount = tokenAccount.account.data.parsed.info.tokenAmount.uiAmountString;
+                                        let name = tokenMetaData[mintAddress].name;
+                                        let symbol = tokenMetaData[mintAddress].symbol;
+                                        return <TokenCard name={name} symbol={symbol} amount={amount} />
+                                    })
+                                }
+                            </> :
+                            <div>Error</div>
+                        }
+                    </div>
 
                     <div className="content-child">
                         <Link to={'/token-list'} className="manage-token-list">Manage Token List</Link>
