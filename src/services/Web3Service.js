@@ -1,6 +1,6 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import { Keypair, PublicKey, Connection, LAMPORTS_PER_SOL, Transaction, SystemProgram, sendAndConfirmTransaction } from "@solana/web3.js";
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, ASSOCIATED_TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { TEST_NETWORKS } from '../constants/Constants';
 
 
@@ -124,6 +124,25 @@ export const getAssociatedTokenAccounts = async (walletAddress, network) => {
     console.log('Token Accounts');
     console.log(tokenAccounts);
     return tokenAccounts;
+}
+
+export const createAssociatedTokenAccount = async (walletKeypair, network, mintAddress) => {
+    const connection = new Connection(network);
+    const tokenMintPubKey = new PublicKey(mintAddress);
+    const tokenAccount = await getOrCreateAssociatedTokenAccount(
+        connection, 
+        walletKeypair, 
+        tokenMintPubKey, 
+        walletKeypair.publicKey,
+        false,
+        'confirmed',
+        undefined,
+        TOKEN_PROGRAM_ID,
+        ASSOCIATED_TOKEN_PROGRAM_ID
+    );
+    console.log('Fetched Token Acount');
+    console.log(tokenAccount);
+    return tokenAccount;
 }
 
 export const getExplorerUrl = (signature, network) => {

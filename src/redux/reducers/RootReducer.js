@@ -4,6 +4,7 @@ import OnboardingReducer from "./OnboardingReducer";
 import TransferReducer from "./TransferReducer";
 import TransactionReducer from "./TransactionReducer";
 import SPLTokenListReducer from "./SPLTokenListReducer";
+import CreateSPLTokenAccountReducer from "./CreateSPLTokenAccountReducer";
 
 export default combineReducers({
     onboarding: OnboardingReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     transfer: TransferReducer,
     transaction: TransactionReducer,
     splTokenList: SPLTokenListReducer,
+    createSplTokenAccount: CreateSPLTokenAccountReducer,
 });

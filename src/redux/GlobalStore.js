@@ -18,6 +18,7 @@ import { all, fork } from 'redux-saga/effects';
 import RootReducer from './reducers/RootReducer';
 import AccountBalanceSaga from './sagas/AccountBalanceSaga';
 import AccountTransactionsSaga from './sagas/AccountTransactionsSaga';
+import CreateSPLTokenAccountSaga from './sagas/CreateSPLTokenAccountSaga';
 import SPLTokenListSaga from './sagas/SPLTokenListSaga';
 import TransactionEstimateSaga from './sagas/TransactionEstimateSaga';
 import TransactionResponseSaga from './sagas/TransactionResponseSaga';
@@ -28,7 +29,8 @@ function* rootSaga() {
         fork(AccountTransactionsSaga),
         fork(TransactionEstimateSaga),
         fork(TransactionResponseSaga),
-        fork(SPLTokenListSaga)
+        fork(SPLTokenListSaga),
+        fork(CreateSPLTokenAccountSaga)
     ])
 }
 

@@ -22,6 +22,9 @@ function App() {
     const dispatch = useDispatch();
     const account = useSelector((state) => state.account, shallowEqual);
 
+    console.log('Account');
+    console.log(account);
+
     useEffect(() => {
         let retrievedAccount = loadAccount();
         let retrievedNetwork = loadNetwork();

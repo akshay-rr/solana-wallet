@@ -27,5 +27,22 @@ export const setLoginStatus = (status) => {
 }
 
 export const loadLoginStatus = () => {
-    localStorage.getItem('loggedIn');
+    return localStorage.getItem('loggedIn');
 }
+
+
+export const saveTokenMetadata = (tokenMetadataObject) => {
+    let tokenMetadata = loadTokenAccountMetadata();
+
+    if(tokenMetadata === null || tokenMetadata === undefined) {
+        tokenMetadata = {};
+    }
+
+    tokenMetadata[tokenMetadataObject.mintAddress] = tokenMetadataObject;
+
+    localStorage.setItem('token-metadata', JSON.stringify(tokenMetadata));
+}
+
+export const loadTokenAccountMetadata = () => {
+    return JSON.parse(localStorage.getItem('token-metadata'));
+};
