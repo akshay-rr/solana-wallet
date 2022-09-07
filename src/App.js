@@ -16,6 +16,7 @@ import Transaction from './components/Transaction';
 import Login from './components/Login';
 import TokenList from './components/TokenList';
 import AddSPLToken from './components/AddSPLToken';
+import SPLTransaction from './components/SPLTransaction';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
                 <Route path={'/transaction'} element={<Transaction />} />
                 <Route path={'/token-list'} element={<TokenList />} />
                 <Route path={'/add-spl-token'} element={<AddSPLToken />} />
+                <Route path={'/spl-token-transaction'} element={<SPLTransaction />} />
             </Routes>
         </MemoryRouter>
     )

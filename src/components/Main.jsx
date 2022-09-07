@@ -72,8 +72,6 @@ const Main = () => {
                             <>
                                 {
                                     splTokenList.data?.value?.map((tokenAccount) => {
-                                        console.log('XVXVX');
-                                        console.log(tokenAccount);
                                         let mintAddress = tokenAccount.account.data.parsed.info.mint;
                                         let amount = tokenAccount.account.data.parsed.info.tokenAmount.uiAmountString;
                                         let name = tokenMetaData[mintAddress].name;

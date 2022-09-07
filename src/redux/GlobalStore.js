@@ -20,6 +20,7 @@ import AccountBalanceSaga from './sagas/AccountBalanceSaga';
 import AccountTransactionsSaga from './sagas/AccountTransactionsSaga';
 import CreateSPLTokenAccountSaga from './sagas/CreateSPLTokenAccountSaga';
 import SPLTokenListSaga from './sagas/SPLTokenListSaga';
+import SPLTransactionResponseSaga from './sagas/SPLTransactionResponseSaga';
 import TransactionEstimateSaga from './sagas/TransactionEstimateSaga';
 import TransactionResponseSaga from './sagas/TransactionResponseSaga';
 
@@ -30,7 +31,8 @@ function* rootSaga() {
         fork(TransactionEstimateSaga),
         fork(TransactionResponseSaga),
         fork(SPLTokenListSaga),
-        fork(CreateSPLTokenAccountSaga)
+        fork(CreateSPLTokenAccountSaga),
+        fork(SPLTransactionResponseSaga)
     ])
 }
 

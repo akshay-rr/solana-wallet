@@ -1,8 +1,7 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import { Keypair, PublicKey, Connection, LAMPORTS_PER_SOL, Transaction, SystemProgram, sendAndConfirmTransaction } from "@solana/web3.js";
-import { TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, ASSOCIATED_TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, ASSOCIATED_TOKEN_PROGRAM_ID, transfer } from '@solana/spl-token';
 import { TEST_NETWORKS } from '../constants/Constants';
-
 
 export const generateNewWallet = () => {
     const mnemonic = generateMnemonic();
@@ -82,8 +81,9 @@ export const getTransactionResponse = async (transactionDetails, wallet, network
         txn,
         [wallet],
     );
-
-    return signature;
+    
+    const transactionResponseDetail = await connection.getParsedTransactions([signature]);
+    return transactionResponseDetail[0];
 }
 
 export const buildTransaction = async (transactionDetails, wallet, recentBlockHash) => {
@@ -149,4 +149,78 @@ export const getExplorerUrl = (signature, network) => {
     return `https://solscan.io/tx/${signature}` 
         + (TEST_NETWORKS.includes(network.name) ? 
         `?cluster=${network.name.toLowerCase()}` : '');
+}
+
+export const constructAssociatedTokenDetails = (splTokenList, tokenMetaData) => {
+
+    let tokenAddresses = Object.keys(tokenMetaData);
+    let tokenDetailList = [];
+
+    splTokenList.data?.value?.forEach((tokenAccount) => {
+        let mintAddress = tokenAccount.account.data.parsed.info.mint;
+        let userAccount = tokenAccount.pubkey.toBase58();
+
+        if(tokenAddresses.includes(mintAddress)) {
+            let amount = tokenAccount.account.data.parsed.info.tokenAmount.uiAmountString;
+            let name = tokenMetaData[mintAddress].name;
+            let symbol = tokenMetaData[mintAddress].symbol;
+            let tokenDetailObj = {
+                mintAddress,
+                name,
+                symbol,
+                amount,
+                userAccount
+            };
+            tokenDetailList.push(tokenDetailObj);
+        }
+    });
+
+    return tokenDetailList;
+};
+
+export const transferSPLToken = async (wallet, to, amount, mintAddress, network) => {
+
+    console.log('Transfer SPL Token');
+
+    const connection = new Connection(network);
+
+    const tokenPubKey = new PublicKey(mintAddress);
+    const toPubKey = new PublicKey(to);
+    const transferAmount = Math.pow(10,6) * amount;
+
+    const toAssociatedAccount = await getOrCreateAssociatedTokenAccount(
+        connection,
+        wallet,
+        tokenPubKey,
+        toPubKey,
+        false,
+        "confirmed",
+        undefined,
+        TOKEN_PROGRAM_ID,
+        ASSOCIATED_TOKEN_PROGRAM_ID
+    );
+
+    const fromAssociatedAccount  = await getOrCreateAssociatedTokenAccount(
+        connection,
+        wallet,
+        tokenPubKey,
+        wallet.publicKey,
+        false,
+        "confirmed",
+        undefined,
+        TOKEN_PROGRAM_ID,
+        ASSOCIATED_TOKEN_PROGRAM_ID
+    );
+
+    const signature = await transfer(
+        connection,
+        wallet,
+        fromAssociatedAccount.address,
+        toAssociatedAccount.address,
+        wallet.publicKey,
+        transferAmount
+    );
+
+    const transactionResponseDetail = await connection.getParsedTransactions([signature]);
+    return transactionResponseDetail[0];
 }

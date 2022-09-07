@@ -45,3 +45,7 @@ export const NETWORKS = {
 }
 
 export const TEST_NETWORKS = [NETWORKS.DEV.name, NETWORKS.TEST.name];
+
+export const SOLANA_NATIVE_ACCOUNT_DETAIL = {
+    mintAddress: '0',
+}

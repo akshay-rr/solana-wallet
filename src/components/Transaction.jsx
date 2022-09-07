@@ -96,7 +96,7 @@ const ConfirmTransaction = () => {
     )
 }
 
-const TransactionLoading = () => {
+export const TransactionLoading = () => {
     return (
         <div className="App">
             <div className="App-header-main">
@@ -133,9 +133,7 @@ const TransactionSuccess = () => {
                     <FontAwesomeIcon icon={faCircleCheck} color={'green'} />
                 </div>
                 <div className="content-child">
-                    <TransactionCard transaction={{
-                            signature: transaction.response.data
-                        }}/>
+                    <TransactionCard transactionDetail={transaction.response.data}/>
                 </div>
 
                 <div className="button-row">
@@ -148,7 +146,7 @@ const TransactionSuccess = () => {
     )
 }
 
-const TransactionFailure = () => {
+export const TransactionFailure = () => {
 
     const navigate = useNavigate();
 
