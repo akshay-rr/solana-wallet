@@ -7,15 +7,38 @@
 
     "permissions": [
         "storage",
-        "scripting"
+        "scripting",
+        "nativeMessaging",
+        "tabs",
+        "activeTab"
     ],
 
     "action": {
-      "default_popup": "index.html"
+        "default_popup": "index.html"
+    },
+
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "content_scripts": [{
+        "matches": ["http://localhost:3000/"],
+        "js": ["contentScript.js"]
+    }],
+
+    "web_accessible_resources": [
+        {
+          "resources": ["injectScript.js"],
+          "matches": ["http://localhost:3000/*"]
+        }
+    ],
+
+    "externally_connectable": {
+        "matches": ["http://localhost:3000/*"]
     },
 
     "host_permissions": [
         "https://*/",
         "http://*/"
     ]
-  }
+}
